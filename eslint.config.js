@@ -4,7 +4,7 @@ export default [
   {
     ...love,
     files: ['**/*.ts'],
-    ignores: ['node_modules/**/*'],
+    ignores: ['node_modules/**/*', 'tests/**/*'],
     rules: {
       ...love.rules,
       '@typescript-eslint/strict-boolean-expressions': 'off',

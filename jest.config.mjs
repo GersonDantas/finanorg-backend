@@ -1,7 +1,7 @@
 /** @type {import('jest').Config} */
 const config = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
+  testEnvironment: 'v8',
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   testMatch: ['**/*.spec.ts', '**/*.test.ts'],
   transform: {
@@ -16,12 +16,7 @@ const config = {
     '/dist/',
     '/coverage/'
   ],
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
-  },
-  clearMocks: true,
-  verbose: true
+  modulePathIgnorePatterns: ['<rootDir>/dist/']
 };
 
 export default config; 
