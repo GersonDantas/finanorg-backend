@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests --watchAll",
+    "test:staged": "npm run test -- --passWithNoTests",
     "prepare": "husky"
   },
   "keywords": [],
