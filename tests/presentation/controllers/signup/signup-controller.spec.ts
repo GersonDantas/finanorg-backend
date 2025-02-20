@@ -21,7 +21,7 @@ const makeSut = (): SutTypes => {
 describe('SignUp Controller', () => {
   test('Should return 400 if an invalid email is provided', async () => {
     const { sut, emailValidatorSpy } = makeSut()
-    emailValidatorSpy.result = false
+    jest.spyOn(emailValidatorSpy, 'validate').mockReturnValueOnce(new Error('Invalid email'))
     const httpRequest = {
       name: 'any_name',
       email: 'invalid_email@mail.com',
