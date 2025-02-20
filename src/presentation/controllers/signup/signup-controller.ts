@@ -1,26 +1,23 @@
-import type { Controller } from '@/presentation/protocols/controller'
-import type { HttpResponse } from '@/presentation/protocols/http'
+import type { Controller, HttpResponse, Validation } from '@/presentation/protocols'
 import type { CreateUser } from '@/domain/usecases/create-user'
-import type { EmailValidator } from '@/validation/protocols/email-validator'
 
 export class SignUpController implements Controller {
   constructor (
-    private readonly emailValidator: EmailValidator,
+    private readonly validation: Validation,
     private readonly createUser: CreateUser
   ) {}
 
   async handle (request: SignUpController.Request): Promise<HttpResponse> {
     try {
-      const { name, email, password } = request
-      
-      const isValidEmail = this.emailValidator.isValid(email)
-      if (!isValidEmail) {
+      const error = this.validation.validate(request)
+      if (error) {
         return {
           statusCode: 400,
-          body: new Error('Invalid email')
+          body: error
         }
       }
 
+      const { name, email, password } = request
       const user = await this.createUser.create({
         name,
         email,

@@ -10,7 +10,7 @@ export const mockUser = (): User => ({
 })
 
 export class CreateUserSpy implements CreateUser {
-  params: CreateUser.Params = null as any
+  params!: CreateUser.Params
   result = mockUser()
 
   async create (params: CreateUser.Params): Promise<CreateUser.Result> {

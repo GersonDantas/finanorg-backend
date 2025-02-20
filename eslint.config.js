@@ -18,7 +18,8 @@ export default [
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
-      
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      'no-console': 'off',
     },
   },
 ]
