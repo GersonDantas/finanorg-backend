@@ -1,5 +1,6 @@
 import type { Controller, HttpResponse, Validation } from '@/presentation/protocols'
 import type { CreateUser } from '@/domain/usecases/create-user'
+import { badRequest } from '@/presentation/helpers'
 
 export class SignUpController implements Controller {
   constructor (
@@ -11,10 +12,7 @@ export class SignUpController implements Controller {
     try {
       const error = this.validation.validate(request)
       if (error) {
-        return {
-          statusCode: 400,
-          body: error
-        }
+        return badRequest(error)
       }
 
       const { name, email, password } = request
