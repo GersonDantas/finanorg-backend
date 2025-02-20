@@ -1,5 +1,6 @@
 import type { User } from '@/domain/models'
 import type { CreateUser } from '@/domain/usecases/create-user'
+import { Validation } from '@/presentation/protocols/validation';
 import type { EmailValidator } from '@/validation/protocols/email-validator'
 
 export const mockUser = (): User => ({
@@ -19,12 +20,12 @@ export class CreateUserSpy implements CreateUser {
   }
 }
 
-export class EmailValidatorSpy implements EmailValidator {
+export class EmailValidatorSpy implements Validation {
   email: string = ''
   result = true
 
-  isValid (email: string): boolean {
-    this.email = email
-    return this.result
+  validate (input: any): Error | null {
+    this.email = input.email
+    return null
   }
 }

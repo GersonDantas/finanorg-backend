@@ -9,5 +9,5 @@ export namespace Authentication {
     email: string
     password: string
   }
-  export type Result = AuthenticationModel
+  export type Result = AuthenticationModel | null
 } 

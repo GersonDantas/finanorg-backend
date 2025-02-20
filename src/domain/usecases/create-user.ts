@@ -1,4 +1,4 @@
-import type { User } from '@/domain/models/user'
+import type { User } from '@/domain/models'
 
 export interface CreateUser {
   create: (data: CreateUser.Params) => Promise<CreateUser.Result>
