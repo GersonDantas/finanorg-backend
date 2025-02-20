@@ -1,4 +1,4 @@
-import type { User } from '@/domain/models/user'
+import type { User } from '@/domain/models'
 import type { CreateUser } from '@/domain/usecases/create-user'
 import type { EmailValidator } from '@/validation/protocols/email-validator'
 
