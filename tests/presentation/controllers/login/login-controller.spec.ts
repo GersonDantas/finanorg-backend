@@ -2,6 +2,7 @@ import { LoginController } from '@/presentation/controllers/login/login-controll
 import { AuthenticationModel } from '@/domain/models/authentication'
 import type { Authentication } from '@/domain/usecases/authentication'
 import type { Validation } from '@/presentation/protocols'
+import { UnauthorizedError, ServerError } from '@/presentation/errors'
 
 class ValidationSpy implements Validation {
   error: Error | null = null
@@ -82,7 +83,18 @@ describe('Login Controller', () => {
       password: 'any_password'
     })
     expect(httpResponse.statusCode).toBe(401)
-    expect(httpResponse.body).toEqual(new Error('Unauthorized'))
+    expect(httpResponse.body).toEqual(new UnauthorizedError())
+  })
+
+  test('Should return 500 if Authentication throws', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(new Error())
+    const httpResponse = await sut.handle({
+      email: 'any_email@mail.com',
+      password: 'any_password'
+    })
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError('Server Error'))
   })
 
   test('Should return 200 if valid credentials are provided', async () => {
